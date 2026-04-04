@@ -5,7 +5,7 @@ function current_cluster
 
   set -l active (set_color magenta)
   set -l inactive (set_color black)
-  set -l unknown (set_color red)
+  set -l unknown (set_color yellow)
   set -l normal (set_color normal)
 
   set -l kubeconfig ~/.kube/config
@@ -30,7 +30,6 @@ function current_cluster
 
   set -l result_list (string split ' ' $result)
   set color $unknown
-  set -l l (count $result_list)
   if test (count $result_list) -eq 2
     if test $result_list[2] = "recent=true"
       set color $inactive

@@ -3,18 +3,26 @@ function kuadrant-operator
       open https://github.com/kuadrant/kuadrant-operator
       return
   end
+
   if test "$argv[1]" = "-p"
       open https://github.com/kuadrant/kuadrant-operator/pulls/Boomatang
       return
   end
+
   if test "$argv[1]" = "--tidy"
   set -e ACK_GINKGO_DEPRECATIONS 
       return
   end
-    
+
+  if test "$argv[1]" = "-s"
+      set -g ACK_GINKGO_DEPRECATIONS 2.11.0
+      set -gx CONTAINER_ENGINE podman
+      set_goroot
+      return
+  end
   cd $GRAB_PATH/github.com/Kuadrant/kuadrant-operator
   set -g ACK_GINKGO_DEPRECATIONS 2.11.0
   set -gx CONTAINER_ENGINE podman
 
-  set_goroot
+  # set_goroot
 end
