@@ -43,6 +43,8 @@ if status is-interactive
     alias gbc "git checkout"
     alias gd "git difftool --no-symlinks --dir-diff"
 
+    alias kssh "kitty +kitten ssh"
+
     alias p 'nvim -c "set cole=1" -c "set filetype=markdown" -c "set runtimepath^=~/.config/nvim/lua/plugins/obsidian.lua" -c "ObsidianNew" '
     # Commands to run in interactive sessions can go here
 end
