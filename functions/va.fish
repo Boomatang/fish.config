@@ -1,4 +1,4 @@
 function va
-  source venv/bin/activate
+  source venv/bin/activate.fish
 
 end
