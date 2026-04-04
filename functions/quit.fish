@@ -1,0 +1,5 @@
+function quit
+
+  exit
+
+end
