@@ -21,6 +21,8 @@ set ZVM_INSTALL "$HOME/.zvm/self"
 set -gx PATH "$PATH:$HOME/.zvm/bin"
 set -gx PATH "$PATH:$ZVM_INSTALL/"
 
+set -gx PYENV_ROOT $HOME/.pyenv
+
 set KUBE_EDITOR nvim
 
 pyenv init - | source
@@ -46,6 +48,11 @@ if status is-interactive
     alias kssh "kitty +kitten ssh"
 
     alias p 'nvim -c "set cole=1" -c "set filetype=markdown" -c "set runtimepath^=~/.config/nvim/lua/plugins/obsidian.lua" -c "ObsidianNew" '
-    # Commands to run in interactive sessions can go here
+
+    alias tree 'tree -C'
+
+    test -d $PYENV_ROOT/bin; and fish_add_path $PYENV_ROOT/bin   # Commands to run in interactive sessions can go here
+
+    pyenv init - fish | source
 end
 
