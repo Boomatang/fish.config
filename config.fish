@@ -15,7 +15,7 @@ set -gx PATH $PATH $HOME/.cargo/bin
 set -gx PATH $PATH $HOME/.local/share/JetBrains/Toolbox/scripts
 
 set -gx CONTAINER_TOOL podman
-set -gx CONATINER_ENGINE podman
+set -gx CONTAINER_ENGINE podman
 # ZVM
 set ZVM_INSTALL "$HOME/.zvm/self"
 set -gx PATH "$PATH:$HOME/.zvm/bin"
