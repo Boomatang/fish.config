@@ -35,6 +35,9 @@ set -gx ANTHROPIC_VERTEX_PROJECT_ID itpc-gcp-hcm-pe-eng-claude
 set -gx PATH "$PATH:$HOME/.npm-global/bin" 
 alias claude "~/.npm-global/bin/claude"
 
+set -gx HSA_OVERRIDE_GFX_VERSION 11.0.0
+set -gx HIP_VISIBLE_DEVICES 0
+
 if status is-interactive
     alias k kubectl
 
@@ -56,3 +59,6 @@ if status is-interactive
     pyenv init - fish | source
 end
 
+
+# opencode
+fish_add_path /home/boomatang/.opencode/bin
