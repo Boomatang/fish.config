@@ -59,3 +59,6 @@ if status is-interactive
     pyenv init - fish | source
 end
 
+
+# opencode
+fish_add_path /home/boomatang/.opencode/bin
