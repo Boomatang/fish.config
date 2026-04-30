@@ -1,18 +1,16 @@
 set EDITOR /usr/bin/nvim
 set FISH_USER_CLUSTER_CHECK 1
 
-set DOTFILES $HOME/code/github.com/Boomatang/dotfiles
-set DOT_SCRIPTS $DOTFILES/scripts
-
 set -g fish_key_bindings fish_vi_key_bindings
 
 set -gx GRAB_PATH $HOME/source
 
-set -gx PATH $PATH  /usr/local/go/bin
-set -gx PATH $PATH $HOME/bin $HOME/.poetry/bin
-set -gx PATH $PATH $HOME/.local/bin
-set -gx PATH $PATH $HOME/.cargo/bin
-set -gx PATH $PATH $HOME/.local/share/JetBrains/Toolbox/scripts
+fish_add_path  /usr/local/go/bin
+fish_add_path $HOME/bin $HOME/.poetry/bin
+fish_add_path $HOME/.local/bin
+fish_add_path $HOME/.cargo/bin
+fish_add_path $HOME/.local/share/JetBrains/Toolbox/scripts
+fish_add_path $HOME/.opencode/bin
 
 set -gx CONTAINER_TOOL podman
 set -gx CONTAINER_ENGINE podman
@@ -54,11 +52,9 @@ if status is-interactive
 
     alias tree 'tree -C'
 
+    alias h "bat -l cmd-help -Pp"
+
     test -d $PYENV_ROOT/bin; and fish_add_path $PYENV_ROOT/bin   # Commands to run in interactive sessions can go here
 
     pyenv init - fish | source
 end
-
-
-# opencode
-fish_add_path /home/boomatang/.opencode/bin
