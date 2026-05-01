@@ -5,6 +5,8 @@ function gen_pr
     set -l branch $argv[1]
     set -l file_loc "/tmp/pr.md"
 
+    echo "Processing..."
+
     if test -z "$branch"
         set branch "main"
     end
