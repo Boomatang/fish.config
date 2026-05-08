@@ -70,7 +70,7 @@ function gen_pr
     set -l org (string split '/' $remote)[1]
     set -l repo (string replace -r '\.git$' '' (string split '/' $remote)[2])
 
-    set message "$message\n\nWith the new changes have a second look at the change, and check to see if there is any follow issue that need to be created. If there is are follow-up issues possible create a new file in @$process_dir/ for each issue. Creating zero follow up issues is okay, but when issues are be made only make up to 3 issue files. In each issue add the following data as frontmatter: org: $org, repo: $repo"
+    set message "$message\n\nWith the new changes have a second look at the change, and check to see if there is any follow issue that need to be created. If there is are follow-up issues possible create a new file in @$process_dir/ for each issue. Creating zero follow up issues is okay, but when issues are be made only make up to 3 issue files. In each issue add the following data as frontmatter: org: $org, repo: $repo, branch: $branch, tags: [gen_pr], pr_url: TBC\n\nThe isuse files should match this naming convention: echo `\$(date +%s)-\$(LC_ALL=C tr -dc 'A-Z' < /dev/urandom | head -c 4).md`"
 
     # SECTION: run AI process
     set -l start (date +%s%N)

@@ -17,8 +17,8 @@ function human_duration
     set -l seconds (math "$total_seconds % 60")
 
     if test $minutes -gt 0
-        printf "%dm %.2fs\n" $minutes $seconds
+        printf "%dm %.4fs\n" $minutes $seconds
     else
-        printf "%.2fs\n" $seconds
+        printf "%.4fs\n" $seconds
     end
 end
