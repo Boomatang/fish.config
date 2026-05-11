@@ -31,7 +31,6 @@ set -gx CLAUDE_CODE_USE_VERTEX 1
 set -gx CLOUD_ML_REGION us-east5
 set -gx ANTHROPIC_VERTEX_PROJECT_ID itpc-gcp-hcm-pe-eng-claude
 set -gx PATH "$PATH:$HOME/.npm-global/bin" 
-alias claude "~/.npm-global/bin/claude"
 
 set -gx HSA_OVERRIDE_GFX_VERSION 11.0.0
 set -gx HIP_VISIBLE_DEVICES 0

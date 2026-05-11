@@ -74,10 +74,12 @@ function gen_pr
 
     # SECTION: run AI process
     set -l start (date +%s%N)
-    claude --allowedTools $tools --dangerously-skip-permissions -p $message > "$process_dir/claude_output.md"
+    claude --allowedTools $tools --dangerously-skip-permissions -p $message --output-format json > "$process_dir/claude_output.json"
     set -l end (date +%s%N)
     set -l elapsed (math "$end - $start")
     echo "claude runtime $(human_duration -n $elapsed)" > "$process_dir/runtime"
+    set -l result (jq -r '"Cost: $\(.total_cost_usd) | Duration: \(.duration_ms)ms | Output Tokens: \(.usage.output_tokens)"' "$process_dir/claude_output.json")
+    echo "$result" >> "$process_dir/runtime"
 
     # SECTION: reviewing the created resources
     set -l past_dir (pwd)
