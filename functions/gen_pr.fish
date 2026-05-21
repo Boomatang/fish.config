@@ -72,6 +72,9 @@ function gen_pr
 
     set message "$message\n\nWith the new changes have a second look at the change, and check to see if there is any follow issue that need to be created. If there is are follow-up issues possible create a new file in @$process_dir/ for each issue. Creating zero follow up issues is okay, but when issues are be made only make up to 3 issue files. In each issue add the following data as frontmatter: org: $org, repo: $repo, branch: $branch, tags: [gen_pr], pr_url: TBC\n\nThe isuse files should match this naming convention: echo `\$(date +%s)-\$(LC_ALL=C tr -dc 'A-Z' < /dev/urandom | head -c 4).md`"
 
+
+    set message "$message\n\nAs this is for a new PR, do a deep dive code review of all the changes. Add this review to a review.md file. Use all the subagents you can. Be hard in the review, if something is stupid call it out, if there is secuirty concerns call it."
+
     # SECTION: run AI process
     set -l start (date +%s%N)
     claude --allowedTools $tools --dangerously-skip-permissions -p $message --output-format json > "$process_dir/claude_output.json"
