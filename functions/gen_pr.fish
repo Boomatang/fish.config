@@ -31,7 +31,7 @@ function gen_pr
     echo "Processing..."
     set -l branch $argv[1]
 
-    set -l tools "Bash(git diff*),Bash(git log*),Write($process_dir/*)"
+    set -l tools "Read(*),Bash(git diff*),Bash(git log*),Bash(git show*),Bash(grep*),Bash(find*),Bash(man*),Write($process_dir/*)"
 
 
     # SECTION: Setup PR prompt
@@ -71,7 +71,20 @@ function gen_pr
     set message "$message\n\nWith the new changes have a second look at the change, and check to see if there is any follow issue that need to be created. If there are follow-up issues possible create a new file in @$process_dir/ for each issue. Creating zero follow up issues is okay, but when issues are be made only make up to 3 issue files. In each issue add the following data as frontmatter: org: $org, repo: $repo, branch: $branch, tags: [gen_pr], pr_url: TBC\n\nThe issue files should match this naming convention: echo `\$(date +%s)-\$(LC_ALL=C tr -dc 'A-Z' < /dev/urandom | head -c 4).md`"
 
 
-    set message "$message\n\nAs this is for a new PR, do a deep dive code review of all the changes. Add this review to a review.md file. Use all the subagents you can. Be hard in the review, if something is stupid call it out, if there are security concerns call it."
+    # Inject project instructions if available
+    set -l claude_md (find . -maxdepth 1 -name "CLAUDE.md" -type f 2>/dev/null)
+    if test -n "$claude_md"
+        set message "$message\n\nProject instructions from CLAUDE.md are available in the repository root. Read CLAUDE.md before starting the review to understand project conventions, hot-path definitions, and architecture."
+    end
+
+    set -l review_prompt_file (status dirname)/gen_pr/review_prompt.md
+    if test -f $review_prompt_file
+        set -l review_prompt (cat $review_prompt_file)
+        set message "$message\n\n$review_prompt\n\nWrite the review output to $process_dir/review.md."
+        echo "loaded prompt file: $review_prompt_file"
+    else
+        set message "$message\n\nAs this is for a new PR, review all changes for correctness, concurrency, performance, and security issues. Add this review to a review.md file. Be thorough but precise -- only raise findings you can substantiate with evidence from the code."
+    end
 
     # SECTION: run AI process
     set -l start (date +%s%N)
