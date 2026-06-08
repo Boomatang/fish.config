@@ -24,7 +24,7 @@ set -gx PYENV_ROOT $HOME/.pyenv
 set KUBE_EDITOR nvim
 
 pyenv init - | source
-zoxide init fish | source
+zoxide init fish --no-cmd | source
 
 # Cluade code crap
 set -gx CLAUDE_CODE_USE_VERTEX 1
